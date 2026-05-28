@@ -278,7 +278,9 @@
     reader.readAsText(file);
   }
 
-  drop.addEventListener('click', () => fileInput.click());
+  // Note: no explicit click handler on `drop` — the <label> wrapping the
+  // <input type="file"> already opens the file picker natively. Adding a
+  // JS click handler caused the dialog to fire twice (label-native + JS).
   fileInput.addEventListener('change', (e) => loadFile(e.target.files[0]));
 
   ['dragenter', 'dragover'].forEach(ev => {
